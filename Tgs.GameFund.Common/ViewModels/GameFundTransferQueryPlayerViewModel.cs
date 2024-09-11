@@ -2,16 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace Tgs.GameFund.Common.ViewModels;
-public record GameFundTransferQueryOperatorViewModel
+public record GameFundTransferQueryPlayerViewModel
 {
 	[Required]
-	[DefaultValue(typeof(string), "4ucmqplxb029")]
-	public string PlayerCode { get; init; } = default!;
-	[Required]
-	[DefaultValue(typeof(DateTimeOffset), "2024-09-09T00:00:00+08:00")]
+	[DefaultValue(typeof(DateTimeOffset), "2024-09-11T00:00:00+08:00")]
 	public DateTimeOffset StartTime { get; init; }
 	[Required]
-	[DefaultValue(typeof(DateTimeOffset), "2024-09-10T00:00:00+08:00")]
+	[DefaultValue(typeof(DateTimeOffset), "2024-09-12T00:00:00+08:00")]
 	public DateTimeOffset EndTime { get; init; }
 	[Required]
 	public Enums.GameFundTransferSort Sort { get; init; }

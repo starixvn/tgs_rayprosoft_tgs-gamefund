@@ -2,12 +2,12 @@
 
 namespace Tgs.GameFund.Core.ApplicationServices;
 
-internal class GameFundTransferQueryOperatorService(
-	IGameFundTransferRepository repository) : IRequestHandler<GameFundTransferQueryOperatorRequest, GameFundTransferQueryOperatorResponse>
+internal class GameFundTransferQueryPlayerService(
+	IGameFundTransferRepository repository) : IRequestHandler<GameFundTransferQueryPlayerRequest, GameFundTransferQueryPlayerResponse>
 {
-	public async Task<GameFundTransferQueryOperatorResponse> Handle(GameFundTransferQueryOperatorRequest request, CancellationToken cancellationToken)
+	public async Task<GameFundTransferQueryPlayerResponse> Handle(GameFundTransferQueryPlayerRequest request, CancellationToken cancellationToken)
 	{
-		var infos = await repository.QueryOperatorAsync(
+		var infos = await repository.QueryPlayerAsync(
 			playerCode: request.PlayerCode,
 			startTime: request.StartTime,
 			endTime: request.EndTime,
@@ -19,7 +19,7 @@ internal class GameFundTransferQueryOperatorService(
 			.ConfigureAwait(false)
 			?? Enumerable.Empty<Models.GameFundTransferInfo>();
 
-		return new GameFundTransferQueryOperatorResponse(
+		return new GameFundTransferQueryPlayerResponse(
 			Items: infos.Skip((request.Page - 1) * request.Rows).Take(request.Rows).Select(x => new GameFundTransferInfoResponse(
 				Id: x.Id,
 				GameProviderId: x.GameProviderId,

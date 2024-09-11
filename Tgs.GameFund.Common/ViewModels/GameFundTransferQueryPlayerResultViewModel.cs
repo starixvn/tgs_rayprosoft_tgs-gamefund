@@ -1,4 +1,4 @@
 ﻿namespace Tgs.GameFund.Common.ViewModels;
-public record GameFundTransferQueryOperatorResultViewModel(
+public record GameFundTransferQueryPlayerResultViewModel(
 	IEnumerable<GameFundTransferInfoViewModel> Items,
 	int TotalCount);

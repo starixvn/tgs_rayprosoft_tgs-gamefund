@@ -2,7 +2,7 @@
 
 public interface IGameFundTransferRepository
 {
-	IAsyncEnumerable<Models.GameFundTransferInfo> QueryOperatorAsync(string playerCode, DateTimeOffset startTime, DateTimeOffset endTime, Common.Enums.GameFundTransferSort sort, bool isAscending = true, CancellationToken cancellationToken = default);
+	IAsyncEnumerable<Models.GameFundTransferInfo> QueryPlayerAsync(string playerCode, DateTimeOffset startTime, DateTimeOffset endTime, Common.Enums.GameFundTransferSort sort, bool isAscending = true, CancellationToken cancellationToken = default);
 
 	ValueTask<Models.GameFundTransferInfo?> GetAsync(Guid id, CancellationToken cancellationToken = default);
 
