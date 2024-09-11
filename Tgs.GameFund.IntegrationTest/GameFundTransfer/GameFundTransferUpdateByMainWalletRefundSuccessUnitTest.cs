@@ -34,7 +34,6 @@ public class GameFundTransferUpdateByMainWalletRefundSuccessUnitTest
 		await sut.GameFundTransferUpdateByMainWalletRefundSuccessAsync(
 			id: id,
 			cashRespTransactionId: cashRespTransactionId,
-			gameRespTransactionId: gameRespTransactionId,
 			mainWalletBalance: mainWalletBalance,
 			description: description,
 			additionalData: additionalData);
@@ -45,7 +44,6 @@ public class GameFundTransferUpdateByMainWalletRefundSuccessUnitTest
 			request: Arg.Is<GameFundTransferUpdateByMainWalletRefundSuccessRequest>(compare =>
 			compare.Id == id &&
 			compare.CashRespTransactionId == cashRespTransactionId &&
-			compare.GameRespTransactionId == gameRespTransactionId &&
 			compare.MainWalletBalance == mainWalletBalance &&
 			compare.Description == description),
 			cancellationToken: Arg.Any<CancellationToken>());

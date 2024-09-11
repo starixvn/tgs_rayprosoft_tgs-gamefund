@@ -158,14 +158,13 @@ internal class GameFundClient(HttpClient httpClient) : IGameFundClient
 		_ = response.EnsureSuccessStatusCode();
 	}
 
-	public async ValueTask GameFundTransferUpdateByMainWalletRefundSuccessAsync(Guid id, Guid cashRespTransactionId, string gameRespTransactionId, decimal mainWalletBalance, string description, JsonNode additionalData, CancellationToken cancellationToken = default)
+	public async ValueTask GameFundTransferUpdateByMainWalletRefundSuccessAsync(Guid id, Guid cashRespTransactionId, decimal mainWalletBalance, string description, JsonNode additionalData, CancellationToken cancellationToken = default)
 	{
 		var response = await httpClient.PutAsJsonAsync(
 			requestUri: $"transfer/{id}/main-wallet/refund/success",
 			value: new GameFundTransferUpdateByMainWalletRefundSuccessViewModel
 			{
 				CashRespTransactionId = cashRespTransactionId,
-				GameRespTransactionId = gameRespTransactionId,
 				MainWalletBalance = mainWalletBalance,
 				Description = description,
 				AdditionalData = additionalData

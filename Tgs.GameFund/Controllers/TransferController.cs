@@ -257,7 +257,6 @@ public class TransferController : ControllerBase
 			request: new GameFundTransferUpdateByMainWalletRefundSuccessRequest(
 				Id: id,
 				CashRespTransactionId: source.CashRespTransactionId,
-				GameRespTransactionId: source.GameRespTransactionId,
 				MainWalletBalance: source.MainWalletBalance,
 				Description: source.Description,
 				AdditionalData: source.AdditionalData),

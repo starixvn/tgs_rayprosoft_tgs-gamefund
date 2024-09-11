@@ -15,7 +15,6 @@ public class GameFundTransferUpdateByMainWalletRefundSuccessServiceUnitTest
 		var request = new GameFundTransferUpdateByMainWalletRefundSuccessRequest(
 			Id: id,
 			CashRespTransactionId: Guid.NewGuid(),
-			GameRespTransactionId: Guid.NewGuid().ToString(),
 			MainWalletBalance: 1.0m,
 			Description: string.Empty,
 			AdditionalData: new JsonObject
