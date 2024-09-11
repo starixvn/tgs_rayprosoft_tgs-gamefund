@@ -27,6 +27,10 @@
       "ObjectType": 0
     },
     {
+      "Name": "dbo.game_fund_transfer_trace",
+      "ObjectType": 0
+    },
+    {
       "Name": "dbo.game_provider_configurations",
       "ObjectType": 0
     },

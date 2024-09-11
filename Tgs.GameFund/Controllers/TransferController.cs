@@ -292,4 +292,18 @@ public class TransferController : ControllerBase
 			cancellationToken: HttpContext.RequestAborted)
 			.ConfigureAwait(false);
 	}
+
+	[HttpPut("game-fund-trace/save")]
+	public async ValueTask GameFundTransferTraceSaveAsync(
+		[FromServices] IMediator mediator,
+		[FromBody] GameFundTransferSaveTraceViewModel source)
+	{
+		await mediator.Send(
+			request: new GameFundTransferSaveTraceRequest(
+				GameProviderId: source.GameProviderId,
+				WalletId: source.WalletId,
+				PlayerCode: source.PlayerCode),
+			cancellationToken: HttpContext.RequestAborted)
+			.ConfigureAwait(false);
+	}
 }

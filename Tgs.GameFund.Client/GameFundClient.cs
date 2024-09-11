@@ -194,4 +194,21 @@ internal class GameFundClient(HttpClient httpClient) : IGameFundClient
 
 		_ = response.EnsureSuccessStatusCode();
 	}
+
+	public async ValueTask GameFundTransferSaveTraceAsync(Guid gameProviderId, Guid walletId, string playerCode, CancellationToken cancellationToken = default)
+	{
+		var response = await httpClient.PutAsJsonAsync(
+			requestUri: $"transfer/game-fund-trace/save",
+			value: new GameFundTransferSaveTraceViewModel
+			{
+				GameProviderId = gameProviderId,
+				WalletId = walletId,
+				PlayerCode = playerCode
+			},
+			options: _SerializerOptions,
+			cancellationToken: cancellationToken)
+			.ConfigureAwait(false);
+
+		_ = response.EnsureSuccessStatusCode();
+	}
 }
