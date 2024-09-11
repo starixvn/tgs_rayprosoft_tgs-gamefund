@@ -1,4 +1,4 @@
 ﻿namespace Tgs.GameFund.Core.ApplicationServices;
-public record GameFundTransferQueryOperatorResponse(
+public record GameFundTransferQueryPlayerResponse(
 	IEnumerable<GameFundTransferInfoResponse> Items,
 	int TotalCount);

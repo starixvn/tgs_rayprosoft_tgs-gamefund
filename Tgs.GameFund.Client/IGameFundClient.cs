@@ -4,7 +4,7 @@ namespace Tgs.GameFund.Client;
 
 public interface IGameFundClient
 {
-	public ValueTask<Common.ViewModels.GameFundTransferQueryOperatorResultViewModel> GameFundTransferQueryOperatorAsync(string playerCode, DateTimeOffset startTime, DateTimeOffset endTime, Common.Enums.GameFundTransferSort sort = Common.Enums.GameFundTransferSort.CreatedOn, bool isAscending = true, int page = 1, int rows = 20, CancellationToken cancellationToken = default);
+	public ValueTask<Common.ViewModels.GameFundTransferQueryPlayerResultViewModel> GameFundTransferQueryPlayerAsync(string playerCode, DateTimeOffset startTime, DateTimeOffset endTime, Common.Enums.GameFundTransferSort sort = Common.Enums.GameFundTransferSort.CreatedOn, bool isAscending = true, int page = 1, int rows = 20, CancellationToken cancellationToken = default);
 
 	public ValueTask<Common.ViewModels.GameFundTransferInfoViewModel?> GameFundTransferGetAsync(Guid id, CancellationToken cancellationToken = default);
 

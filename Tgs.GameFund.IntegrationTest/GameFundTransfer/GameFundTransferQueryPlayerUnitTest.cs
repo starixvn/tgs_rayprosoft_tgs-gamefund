@@ -6,7 +6,7 @@ using Tgs.GameFund.Core.ApplicationServices;
 
 namespace Tgs.GameFund.IntegrationTest.GameFundTransfer;
 
-public class GameFundTransferQueryOperatorUnitTest
+public class GameFundTransferQueryPlayerUnitTest
 {
 	[Fact]
 	public async Task Normal_Process()
@@ -36,7 +36,7 @@ public class GameFundTransferQueryOperatorUnitTest
 			CreatedOn: DateTimeOffset.UtcNow,
 			UpdatedOn: DateTimeOffset.UtcNow);
 
-		var response = new GameFundTransferQueryOperatorResponse(
+		var response = new GameFundTransferQueryPlayerResponse(
 			Items: [infoResponse],
 			TotalCount: 1);
 
@@ -44,7 +44,7 @@ public class GameFundTransferQueryOperatorUnitTest
 		{
 			var fakeMediator = Substitute.For<IMediator>();
 
-			var request = new GameFundTransferQueryOperatorRequest(
+			var request = new GameFundTransferQueryPlayerRequest(
 				PlayerCode: playerCode,
 				StartTime: DateTimeOffset.Parse(startTime.ToString("u")),
 				EndTime: DateTimeOffset.Parse(endTime.ToString("u")),
@@ -65,7 +65,7 @@ public class GameFundTransferQueryOperatorUnitTest
 
 		var sut = new GameFundClient(httpClient);
 
-		var actual = await sut.GameFundTransferQueryOperatorAsync(
+		var actual = await sut.GameFundTransferQueryPlayerAsync(
 			playerCode: playerCode,
 			startTime: startTime,
 			endTime: endTime,
@@ -103,7 +103,7 @@ public class GameFundTransferQueryOperatorUnitTest
 		var page = 1;
 		var rows = 1;
 
-		var response = new GameFundTransferQueryOperatorResponse(
+		var response = new GameFundTransferQueryPlayerResponse(
 			Items: [],
 			TotalCount: 0);
 
@@ -111,7 +111,7 @@ public class GameFundTransferQueryOperatorUnitTest
 		{
 			var fakeMediator = Substitute.For<IMediator>();
 
-			var request = new GameFundTransferQueryOperatorRequest(
+			var request = new GameFundTransferQueryPlayerRequest(
 				PlayerCode: playerCode,
 				StartTime: DateTimeOffset.Parse(startTime.ToString("u")),
 				EndTime: DateTimeOffset.Parse(endTime.ToString("u")),
@@ -132,7 +132,7 @@ public class GameFundTransferQueryOperatorUnitTest
 
 		var sut = new GameFundClient(httpClient);
 
-		var actual = await sut.GameFundTransferQueryOperatorAsync(
+		var actual = await sut.GameFundTransferQueryPlayerAsync(
 			playerCode: playerCode,
 			startTime: startTime,
 			endTime: endTime,

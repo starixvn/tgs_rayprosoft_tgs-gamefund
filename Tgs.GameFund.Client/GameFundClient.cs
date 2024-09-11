@@ -85,12 +85,11 @@ internal class GameFundClient(HttpClient httpClient) : IGameFundClient
 		return JsonSerializer.Deserialize<GameFundTransferInfoViewModel>(contentJson, _SerializerOptions);
 	}
 
-	public async ValueTask<GameFundTransferQueryOperatorResultViewModel> GameFundTransferQueryOperatorAsync(string playerCode, DateTimeOffset startTime, DateTimeOffset endTime, GameFundTransferSort sort = GameFundTransferSort.CreatedOn, bool isAscending = true, int page = 1, int rows = 20, CancellationToken cancellationToken = default)
+	public async ValueTask<GameFundTransferQueryPlayerResultViewModel> GameFundTransferQueryPlayerAsync(string playerCode, DateTimeOffset startTime, DateTimeOffset endTime, GameFundTransferSort sort = GameFundTransferSort.CreatedOn, bool isAscending = true, int page = 1, int rows = 20, CancellationToken cancellationToken = default)
 	{
-		var path = new Uri(httpClient.BaseAddress!, "transfer/query/operator");
+		var path = new Uri(httpClient.BaseAddress!, $"transfer/{playerCode}");
 		var builder = new UriBuilder(path);
 		var query = HttpUtility.ParseQueryString(builder.Query);
-		query["playerCode"] = playerCode.ToString();
 		query["startTime"] = startTime.ToString("u");
 		query["endTime"] = endTime.ToString("u");
 		query["sort"] = sort.ToString();
@@ -108,7 +107,7 @@ internal class GameFundClient(HttpClient httpClient) : IGameFundClient
 
 		var contentJson = await response.Content.ReadAsStringAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
 
-		return JsonSerializer.Deserialize<GameFundTransferQueryOperatorResultViewModel>(contentJson, _SerializerOptions)!;
+		return JsonSerializer.Deserialize<GameFundTransferQueryPlayerResultViewModel>(contentJson, _SerializerOptions)!;
 	}
 
 	public async ValueTask GameFundTransferUpdateByGameWalletFailedAsync(Guid id, string description, JsonNode additionalData, CancellationToken cancellationToken = default)

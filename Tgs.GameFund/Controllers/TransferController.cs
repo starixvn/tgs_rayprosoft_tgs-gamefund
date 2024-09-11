@@ -10,31 +10,31 @@ namespace Tgs.GameFund.Controllers;
 public class TransferController : ControllerBase
 {
 	/// <summary>
-	/// Games the fund transfer query operator asynchronous.
+	/// Games the fund transfer query player asynchronous.
 	/// </summary>
 	/// <param name="mediator">The mediator.</param>
 	/// <param name="source">The source.</param>
+	/// <param name="playerCode">The player code.</param>
 	/// <returns></returns>
-	[HttpGet("query/operator")]
-	public async ValueTask<GameFundTransferQueryOperatorResultViewModel> GameFundTransferQueryOperatorAsync(
+	[HttpGet("{playerCode}")]
+	public async ValueTask<GameFundTransferQueryPlayerResultViewModel> GameFundTransferQueryPlayerAsync(
 		[FromServices] IMediator mediator,
-		[FromQuery] GameFundTransferQueryOperatorViewModel source)
+		[FromQuery] GameFundTransferQueryPlayerViewModel source,
+		string playerCode = "4unykr72x8d9")
 	{
-		var request = new GameFundTransferQueryOperatorRequest(
-			PlayerCode: source.PlayerCode,
-			StartTime: source.StartTime,
-			EndTime: source.EndTime,
-			Sort: source.Sort,
-			IsAscending: source.IsAscending,
-			Page: source.Page,
-			Rows: source.Rows);
-
 		var response = await mediator.Send(
-			request: request,
+			request: new GameFundTransferQueryPlayerRequest(
+				PlayerCode: playerCode,
+				StartTime: source.StartTime,
+				EndTime: source.EndTime,
+				Sort: source.Sort,
+				IsAscending: source.IsAscending,
+				Page: source.Page,
+				Rows: source.Rows),
 			cancellationToken: HttpContext.RequestAborted)
 			.ConfigureAwait(false);
 
-		return new GameFundTransferQueryOperatorResultViewModel(
+		return new GameFundTransferQueryPlayerResultViewModel(
 			Items: response.Items.Select(x => new GameFundTransferInfoViewModel(
 				Id: x.Id,
 				GameProviderId: x.GameProviderId,

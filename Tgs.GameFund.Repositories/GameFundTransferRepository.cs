@@ -58,7 +58,7 @@ public class GameFundTransferRepository(
 		.FirstOrDefaultAsync(cancellationToken: cancellationToken)
 		.ConfigureAwait(false);
 
-	public async IAsyncEnumerable<Core.Models.GameFundTransferInfo> QueryOperatorAsync(string playerCode, DateTimeOffset startTime, DateTimeOffset endTime, Common.Enums.GameFundTransferSort sort, bool isAscending = true, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+	public async IAsyncEnumerable<Core.Models.GameFundTransferInfo> QueryPlayerAsync(string playerCode, DateTimeOffset startTime, DateTimeOffset endTime, Common.Enums.GameFundTransferSort sort, bool isAscending = true, [EnumeratorCancellation] CancellationToken cancellationToken = default)
 	{
 		var query = context.GameProviderFundTransferTransactions
 		.Where(x => x.PlayerCode == playerCode

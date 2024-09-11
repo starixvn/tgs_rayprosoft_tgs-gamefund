@@ -4,7 +4,7 @@ using Tgs.GameFund.Core.Models;
 
 namespace Tgs.GameFund.Core.UnitTest.ApplicationServices;
 
-public class GameFundTransferQueryOperatorServiceUnitTest
+public class GameFundTransferQueryPlayerServiceUnitTest
 {
 	[Fact]
 	public async Task Normal_Process()
@@ -12,7 +12,7 @@ public class GameFundTransferQueryOperatorServiceUnitTest
 		var fakeGameFundTransferRepository = Substitute.For<IGameFundTransferRepository>();
 
 		var id = Guid.NewGuid();
-		var request = new GameFundTransferQueryOperatorRequest(
+		var request = new GameFundTransferQueryPlayerRequest(
 			PlayerCode: "4ucmqplxb029",
 			StartTime: DateTimeOffset.UtcNow.AddMonths(-1),
 			EndTime: DateTimeOffset.UtcNow,
@@ -35,7 +35,7 @@ public class GameFundTransferQueryOperatorServiceUnitTest
 			Amount: 1,
 			CreatedOn: DateTimeOffset.UtcNow,
 			UpdatedOn: DateTimeOffset.UtcNow);
-		_ = fakeGameFundTransferRepository.QueryOperatorAsync(
+		_ = fakeGameFundTransferRepository.QueryPlayerAsync(
 			playerCode: Arg.Is(request.PlayerCode),
 			startTime: Arg.Is(request.StartTime),
 			endTime: Arg.Is(request.EndTime),
@@ -44,7 +44,7 @@ public class GameFundTransferQueryOperatorServiceUnitTest
 			cancellationToken: Arg.Any<CancellationToken>())
 			.Returns(new[] { info }.ToAsyncEnumerable());
 
-		var sut = new GameFundTransferQueryOperatorService(
+		var sut = new GameFundTransferQueryPlayerService(
 			fakeGameFundTransferRepository);
 
 		var cancellationTokenSource = new CancellationTokenSource();
@@ -74,7 +74,7 @@ public class GameFundTransferQueryOperatorServiceUnitTest
 		var fakeGameFundTransferRepository = Substitute.For<IGameFundTransferRepository>();
 
 		var id = Guid.NewGuid();
-		var request = new GameFundTransferQueryOperatorRequest(
+		var request = new GameFundTransferQueryPlayerRequest(
 			PlayerCode: "4ucmqplxb029",
 			StartTime: DateTimeOffset.UtcNow.AddMonths(-1),
 			EndTime: DateTimeOffset.UtcNow,
@@ -97,7 +97,7 @@ public class GameFundTransferQueryOperatorServiceUnitTest
 			Amount: 1,
 			CreatedOn: DateTimeOffset.UtcNow,
 			UpdatedOn: DateTimeOffset.UtcNow);
-		_ = fakeGameFundTransferRepository.QueryOperatorAsync(
+		_ = fakeGameFundTransferRepository.QueryPlayerAsync(
 			playerCode: Arg.Is(request.PlayerCode),
 			startTime: Arg.Is(request.StartTime),
 			endTime: Arg.Is(request.EndTime),
@@ -106,7 +106,7 @@ public class GameFundTransferQueryOperatorServiceUnitTest
 			cancellationToken: Arg.Any<CancellationToken>())
 			.Returns(new[] { info }.ToAsyncEnumerable());
 
-		var sut = new GameFundTransferQueryOperatorService(
+		var sut = new GameFundTransferQueryPlayerService(
 			fakeGameFundTransferRepository);
 
 		var cancellationTokenSource = new CancellationTokenSource();
@@ -124,7 +124,7 @@ public class GameFundTransferQueryOperatorServiceUnitTest
 	{
 		var fakeGameFundTransferRepository = Substitute.For<IGameFundTransferRepository>();
 
-		var request = new GameFundTransferQueryOperatorRequest(
+		var request = new GameFundTransferQueryPlayerRequest(
 			PlayerCode: "4ucmqplxb029",
 			StartTime: DateTimeOffset.UtcNow.AddMonths(-1),
 			EndTime: DateTimeOffset.UtcNow,
@@ -133,7 +133,7 @@ public class GameFundTransferQueryOperatorServiceUnitTest
 			Page: 1,
 			Rows: 1);
 
-		_ = fakeGameFundTransferRepository.QueryOperatorAsync(
+		_ = fakeGameFundTransferRepository.QueryPlayerAsync(
 			playerCode: Arg.Is(request.PlayerCode),
 			startTime: Arg.Is(request.StartTime),
 			endTime: Arg.Is(request.EndTime),
@@ -142,7 +142,7 @@ public class GameFundTransferQueryOperatorServiceUnitTest
 			cancellationToken: Arg.Any<CancellationToken>())
 			.Returns(Enumerable.Empty<GameFundTransferInfo>().ToAsyncEnumerable());
 
-		var sut = new GameFundTransferQueryOperatorService(
+		var sut = new GameFundTransferQueryPlayerService(
 			fakeGameFundTransferRepository);
 
 		var cancellationTokenSource = new CancellationTokenSource();
