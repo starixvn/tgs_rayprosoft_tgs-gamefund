@@ -38,6 +38,7 @@ internal class GameFundTransferAddFundOutService(
 			Source: info.Source,
 			Status: info.Status,
 			CashTransactionId: info.CashTransactionId,
+			CashRespTransactionId: info.CashRespTransactionId,
 			GameTransactionId: info.GameTransactionId,
 			Amount: info.Amount,
 			CreatedOn: info.CreatedOn,

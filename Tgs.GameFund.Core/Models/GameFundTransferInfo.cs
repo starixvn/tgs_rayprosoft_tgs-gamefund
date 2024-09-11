@@ -9,6 +9,7 @@ public record GameFundTransferInfo(
 	Common.Enums.GameFundTransferSource Source,
 	Common.Enums.GameFundTransferStatus Status,
 	string CashTransactionId,
+	Guid? CashRespTransactionId,
 	string GameTransactionId,
 	decimal Amount,
 	DateTimeOffset CreatedOn,

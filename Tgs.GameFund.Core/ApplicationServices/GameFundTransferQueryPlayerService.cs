@@ -30,6 +30,7 @@ internal class GameFundTransferQueryPlayerService(
 				Source: x.Source,
 				Status: x.Status,
 				CashTransactionId: x.CashTransactionId,
+				CashRespTransactionId: x.CashRespTransactionId,
 				GameTransactionId: x.GameTransactionId,
 				Amount: x.Amount,
 				CreatedOn: x.CreatedOn,

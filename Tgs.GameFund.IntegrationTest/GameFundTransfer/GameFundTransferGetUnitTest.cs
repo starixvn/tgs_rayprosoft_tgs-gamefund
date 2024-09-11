@@ -25,6 +25,7 @@ public class GameFundTransferGetUnitTest
 			Source: Common.Enums.GameFundTransferSource.FundIn,
 			Status: Common.Enums.GameFundTransferStatus.Processing,
 			CashTransactionId: id.ToString(),
+			CashRespTransactionId: null,
 			GameTransactionId: Guid.NewGuid().ToString(),
 			Amount: 1,
 			CreatedOn: DateTimeOffset.UtcNow,
@@ -62,6 +63,7 @@ public class GameFundTransferGetUnitTest
 		Assert.Equal(Common.Enums.GameFundTransferSource.FundIn, actual.Source);
 		Assert.Equal(Common.Enums.GameFundTransferStatus.Processing, actual.Status);
 		Assert.Equal(response.CashTransactionId, actual.CashTransactionId);
+		Assert.Null(actual.CashRespTransactionId);
 		Assert.Equal(response.GameTransactionId, actual.GameTransactionId);
 		Assert.Equal(1.0m, actual.Amount);
 	}

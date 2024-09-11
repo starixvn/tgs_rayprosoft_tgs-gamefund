@@ -33,6 +33,7 @@ public class GameFundTransferAddFundOutServiceUnitTest
 			Common.Enums.GameFundTransferSource.FundOut,
 			Common.Enums.GameFundTransferStatus.Processing,
 			CashTransactionId: id.ToString(),
+			CashRespTransactionId: null,
 			GameTransactionId: request.GameTransactionId,
 			Amount: 1,
 			CreatedOn: DateTimeOffset.UtcNow,

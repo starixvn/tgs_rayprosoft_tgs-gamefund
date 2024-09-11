@@ -54,6 +54,7 @@ public class GameFundTransferAddFundOutUnitTest
 				Source: Common.Enums.GameFundTransferSource.FundOut,
 				Status: Common.Enums.GameFundTransferStatus.Processing,
 				CashTransactionId: id.ToString(),
+				CashRespTransactionId: null,
 				GameTransactionId: request.GameTransactionId,
 				Amount: 1,
 				CreatedOn: DateTimeOffset.UtcNow,
@@ -87,6 +88,7 @@ public class GameFundTransferAddFundOutUnitTest
 		Assert.Equal(Common.Enums.GameFundTransferSource.FundOut, actual.Source);
 		Assert.Equal(Common.Enums.GameFundTransferStatus.Processing, actual.Status);
 		Assert.Equal(source.CashTransactionId, actual.CashTransactionId);
+		Assert.Null(actual.CashRespTransactionId);
 		Assert.Equal(source.GameTransactionId, actual.GameTransactionId);
 		Assert.Equal(1.0m, actual.Amount);
 	}

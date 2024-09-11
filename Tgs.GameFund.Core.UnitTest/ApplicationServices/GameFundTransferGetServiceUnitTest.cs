@@ -25,6 +25,7 @@ public class GameFundTransferGetServiceUnitTest
 			Source: Common.Enums.GameFundTransferSource.FundOut,
 			Status: Common.Enums.GameFundTransferStatus.Processing,
 			CashTransactionId: id.ToString(),
+			CashRespTransactionId: null,
 			GameTransactionId: Guid.NewGuid().ToString(),
 			Amount: 1,
 			CreatedOn: DateTimeOffset.UtcNow,
