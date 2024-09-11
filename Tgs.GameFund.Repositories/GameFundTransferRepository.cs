@@ -113,7 +113,7 @@ public class GameFundTransferRepository(
 
 		entity.TransactionId = null;
 		entity.Status = (short)Common.Enums.GameFundTransferStatus.GameProviderFundFailed;
-		entity.UpdatedOn = timeProvider.GetUtcNow().DateTime;
+		entity.UpdatedOn = timeProvider.GetUtcNow().UtcDateTime;
 
 		_ = context.GameProviderFundTransferTransactions.Update(entity);
 
@@ -130,7 +130,7 @@ public class GameFundTransferRepository(
 			.ConfigureAwait(false);
 
 		entity.Status = (short)Common.Enums.GameFundTransferStatus.MainWalletFundFailed;
-		entity.UpdatedOn = timeProvider.GetUtcNow().DateTime;
+		entity.UpdatedOn = timeProvider.GetUtcNow().UtcDateTime;
 
 		_ = context.GameProviderFundTransferTransactions.Update(entity);
 
@@ -148,7 +148,7 @@ public class GameFundTransferRepository(
 
 		entity.Status = (short)Common.Enums.GameFundTransferStatus.MainWalletFundRefundFailed;
 		entity.Description = description;
-		entity.UpdatedOn = timeProvider.GetUtcNow().DateTime;
+		entity.UpdatedOn = timeProvider.GetUtcNow().UtcDateTime;
 
 		_ = context.GameProviderFundTransferTransactions.Update(entity);
 
@@ -167,7 +167,7 @@ public class GameFundTransferRepository(
 		entity.TransactionId = cashRespTransactionId;
 		entity.Status = (short)Common.Enums.GameFundTransferStatus.MainWalletFundRefundSuccess;
 		entity.Description = description;
-		entity.UpdatedOn = timeProvider.GetUtcNow().DateTime;
+		entity.UpdatedOn = timeProvider.GetUtcNow().UtcDateTime;
 
 		_ = context.GameProviderFundTransferTransactions.Update(entity);
 
@@ -186,7 +186,7 @@ public class GameFundTransferRepository(
 		entity.TransactionId = cashRespTransactionId;
 		entity.Status = (short)Common.Enums.GameFundTransferStatus.Success;
 		entity.Balance = balance;
-		entity.UpdatedOn = timeProvider.GetUtcNow().DateTime;
+		entity.UpdatedOn = timeProvider.GetUtcNow().UtcDateTime;
 
 		_ = context.GameProviderFundTransferTransactions.Update(entity);
 
