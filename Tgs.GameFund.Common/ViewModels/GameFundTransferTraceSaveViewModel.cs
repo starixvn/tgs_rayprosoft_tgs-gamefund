@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Tgs.GameFund.Common.ViewModels;
 
-public record class GameFundTransferSaveTraceViewModel
+public record class GameFundTransferTraceSaveViewModel
 {
 	[Required]
 	[DefaultValue(typeof(Guid), "00000000-0000-0000-0000-000000000000")]

@@ -3,19 +3,19 @@ using Tgs.GameFund.Core.ApplicationServices;
 
 namespace Tgs.GameFund.Core.UnitTest.ApplicationServices;
 
-public class GameFundTransferSaveTraceServiceUnitTest
+public class GameFundTransferTraceSaveServiceUnitTest
 {
 	[Fact]
 	public async Task Normal_Process()
 	{
 		var fakeGameFundTransferRepository = Substitute.For<IGameFundTransferTraceRepository>();
 
-		var request = new GameFundTransferSaveTraceRequest(
+		var request = new GameFundTransferTraceSaveRequest(
 			GameProviderId: Guid.NewGuid(),
 			WalletId: Guid.NewGuid(),
 			PlayerCode: "4ucmqplxb029");
 
-		var sut = new GameFundTransferSaveTraceService(
+		var sut = new GameFundTransferTraceSaveService(
 			fakeGameFundTransferRepository);
 
 		var cancellationTokenSource = new CancellationTokenSource();

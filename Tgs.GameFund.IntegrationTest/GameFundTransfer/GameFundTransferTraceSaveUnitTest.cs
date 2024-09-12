@@ -6,7 +6,7 @@ using Tgs.GameFund.Core.ApplicationServices;
 
 namespace Tgs.GameFund.IntegrationTest.GameFundTransfer;
 
-public class GameFundTransferSaveTraceUnitTest
+public class GameFundTransferTraceSaveUnitTest
 {
 	[Fact]
 	public async Task Normal_Process()
@@ -23,7 +23,7 @@ public class GameFundTransferSaveTraceUnitTest
 
 		var sut = new GameFundClient(httpClient);
 
-		await sut.GameFundTransferSaveTraceAsync(
+		await sut.GameFundTransferTraceSaveAsync(
 			gameProviderId: gameProviderId,
 			walletId: walletId,
 			playerCode: playerCode);
@@ -31,7 +31,7 @@ public class GameFundTransferSaveTraceUnitTest
 		_ = fakeMediator
 			.Received(1)
 			.Send(
-				request: Arg.Is<GameFundTransferSaveTraceRequest>(compare =>
+				request: Arg.Is<GameFundTransferTraceSaveRequest>(compare =>
 					compare.GameProviderId == gameProviderId &&
 					compare.WalletId == walletId &&
 					compare.PlayerCode == playerCode),

@@ -195,11 +195,11 @@ internal class GameFundClient(HttpClient httpClient) : IGameFundClient
 		_ = response.EnsureSuccessStatusCode();
 	}
 
-	public async ValueTask GameFundTransferSaveTraceAsync(Guid gameProviderId, Guid walletId, string playerCode, CancellationToken cancellationToken = default)
+	public async ValueTask GameFundTransferTraceSaveAsync(Guid gameProviderId, Guid walletId, string playerCode, CancellationToken cancellationToken = default)
 	{
 		var response = await httpClient.PutAsJsonAsync(
-			requestUri: $"transfer/game-fund-trace/save",
-			value: new GameFundTransferSaveTraceViewModel
+			requestUri: $"transfertrace/trace/save",
+			value: new GameFundTransferTraceSaveViewModel
 			{
 				GameProviderId = gameProviderId,
 				WalletId = walletId,
