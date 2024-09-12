@@ -1,6 +1,0 @@
-@Tgs.GameFund_HostAddress = http://localhost:5169
-
-GET {{Tgs.GameFund_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

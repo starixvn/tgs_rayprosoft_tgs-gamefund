@@ -18,6 +18,8 @@ public partial class TgsContext : DbContext
 
     public virtual DbSet<BrandGameProvider> BrandGameProviders { get; set; }
 
+    public virtual DbSet<GameFundTransferTrace> GameFundTransferTraces { get; set; }
+
     public virtual DbSet<GameProvider> GameProviders { get; set; }
 
     public virtual DbSet<GameProviderConfig> GameProviderConfigs { get; set; }
@@ -34,6 +36,7 @@ public partial class TgsContext : DbContext
 
         modelBuilder.ApplyConfiguration(new Configurations.BrandConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.BrandGameProviderConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.GameFundTransferTraceConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.GameProviderConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.GameProviderConfigConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.GameProviderFundTransferTransactionConfiguration());

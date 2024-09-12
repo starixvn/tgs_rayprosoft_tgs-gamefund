@@ -14,5 +14,6 @@ public static class ServiceCollectionExtensions
 		=> services
 		.AddDbContext<TgsContext>(tgsConfigure)
 		.AddScoped<IDbConnection>((sp) => sp.GetRequiredService<TgsContext>().Database.GetDbConnection())
-		.AddTransient<IGameFundTransferRepository, GameFundTransferRepository>();
+		.AddTransient<IGameFundTransferRepository, GameFundTransferRepository>()
+		.AddTransient<IGameFundTransferTraceRepository, GameFundTransferTraceRepository>();
 }
