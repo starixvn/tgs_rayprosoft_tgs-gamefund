@@ -17,6 +17,4 @@ public interface IGameFundTransferRepository
 	ValueTask UpdateByMainWalletRefundSuccessAsync(Guid id, Guid cashRespTransactionId, decimal balance, string description, CancellationToken cancellationToken = default);
 
 	ValueTask UpdateBySuccessAsync(Guid id, Guid cashRespTransactionId, decimal balance, CancellationToken cancellationToken = default);
-
-	ValueTask SaveTraceAsync(Guid gameProviderId, Guid walletId, string playerCode, CancellationToken cancellationToken = default);
 }

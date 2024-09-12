@@ -8,7 +8,7 @@ public class GameFundTransferSaveTraceServiceUnitTest
 	[Fact]
 	public async Task Normal_Process()
 	{
-		var fakeGameFundTransferRepository = Substitute.For<IGameFundTransferRepository>();
+		var fakeGameFundTransferRepository = Substitute.For<IGameFundTransferTraceRepository>();
 
 		var request = new GameFundTransferSaveTraceRequest(
 			GameProviderId: Guid.NewGuid(),

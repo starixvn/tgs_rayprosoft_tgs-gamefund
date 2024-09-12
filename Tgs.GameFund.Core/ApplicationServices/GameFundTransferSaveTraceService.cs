@@ -3,7 +3,7 @@ using MediatR;
 namespace Tgs.GameFund.Core.ApplicationServices;
 
 internal class GameFundTransferSaveTraceService(
-	IGameFundTransferRepository repository) : IRequestHandler<GameFundTransferSaveTraceRequest>
+	IGameFundTransferTraceRepository repository) : IRequestHandler<GameFundTransferSaveTraceRequest>
 {
 	public Task Handle(GameFundTransferSaveTraceRequest request, CancellationToken cancellationToken)
         => repository
