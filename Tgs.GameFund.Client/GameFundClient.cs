@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Collections.Specialized;
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
@@ -210,5 +211,29 @@ internal class GameFundClient(HttpClient httpClient) : IGameFundClient
 			.ConfigureAwait(false);
 
 		_ = response.EnsureSuccessStatusCode();
+	}
+
+	public async ValueTask<string[]> GameFundTransferTraceQueryAsync(string gameProviderCode, string? brandCode, DateTimeOffset? startTime, DateTimeOffset? endTime, CancellationToken cancellationToken = default)
+	{
+		var query = HttpUtility.ParseQueryString("");
+		query["gameProviderCode"] = gameProviderCode;
+		if (brandCode is { Length: > 0 })
+			query["brandCode"] = brandCode;
+		if (startTime is DateTimeOffset start)
+			query["startTime"] = start.ToString("u");
+		if (endTime is DateTimeOffset end)
+			query["endTime"] = end.ToString("u");
+		var url = "transfertrace/trace/query?" + query.ToString();
+
+		var response = await httpClient.GetAsync(
+			requestUri: url,
+			cancellationToken: cancellationToken)
+			.ConfigureAwait(false);
+
+		_ = response.EnsureSuccessStatusCode();
+
+		var contentJson = await response.Content.ReadAsStringAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+
+		return JsonSerializer.Deserialize<string[]>(contentJson, _SerializerOptions)!;
 	}
 }

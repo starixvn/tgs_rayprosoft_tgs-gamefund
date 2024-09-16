@@ -4,7 +4,7 @@ using NSubstitute;
 using Tgs.GameFund.Client;
 using Tgs.GameFund.Core.ApplicationServices;
 
-namespace Tgs.GameFund.IntegrationTest.GameFundTransfer;
+namespace Tgs.GameFund.IntegrationTest.GameFundTransferTrace;
 
 public class GameFundTransferTraceSaveUnitTest
 {

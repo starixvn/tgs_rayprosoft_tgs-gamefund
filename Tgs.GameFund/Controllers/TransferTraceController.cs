@@ -22,4 +22,16 @@ public class TransferTraceController : ControllerBase
 			cancellationToken: HttpContext.RequestAborted)
 			.ConfigureAwait(false);
 	}
+
+	[HttpGet("trace/query")]
+	public IAsyncEnumerable<string> GameFundTransferTraceQueryAsync(
+		[FromServices] IMediator mediator,
+		[FromQuery] GameFundTransferTraceQueryViewModel source)
+		=> mediator.CreateStream(
+			request: new GameFundTransferTraceQueryRequest(
+				GameProviderCode: source.GameProviderCode,
+				BrandCode: source.BrandCode,
+				StartTime: source.StartTime,
+				EndTime: source.EndTime),
+			cancellationToken: HttpContext.RequestAborted);
 }
