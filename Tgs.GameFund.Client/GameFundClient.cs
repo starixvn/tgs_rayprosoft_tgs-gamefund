@@ -211,4 +211,32 @@ internal class GameFundClient(HttpClient httpClient) : IGameFundClient
 
 		_ = response.EnsureSuccessStatusCode();
 	}
+
+	public async ValueTask<string[]> GameFundTransferTraceBrandQueryAsync(string gameProviderCode, string brandCode, CancellationToken cancellationToken = default)
+	{
+		var response = await httpClient.GetAsync(
+			requestUri: $"transfertrace/trace/queryWithBrand?gameProviderCode={gameProviderCode}&brandCode={brandCode}",
+			cancellationToken: cancellationToken)
+			.ConfigureAwait(false);
+
+		_ = response.EnsureSuccessStatusCode();
+
+		var contentJson = await response.Content.ReadAsStringAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+
+		return JsonSerializer.Deserialize<string[]>(contentJson, _SerializerOptions)!;
+	}
+
+	public async ValueTask<string[]> GameFundTransferTraceMonthQueryAsync(string gameProviderCode, int year, int month, CancellationToken cancellationToken = default)
+	{
+		var response = await httpClient.GetAsync(
+			requestUri: $"transfertrace/trace/queryWithMonth?gameProviderCode={gameProviderCode}&year={year}&month={month}",
+			cancellationToken: cancellationToken)
+			.ConfigureAwait(false);
+
+		_ = response.EnsureSuccessStatusCode();
+
+		var contentJson = await response.Content.ReadAsStringAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+
+		return JsonSerializer.Deserialize<string[]>(contentJson, _SerializerOptions)!;
+	}
 }
