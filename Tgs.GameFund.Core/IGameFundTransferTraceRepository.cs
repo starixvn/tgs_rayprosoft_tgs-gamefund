@@ -4,7 +4,7 @@ public interface IGameFundTransferTraceRepository
 {
 	ValueTask SaveTraceAsync(Guid gameProviderId, Guid walletId, string playerCode, CancellationToken cancellationToken = default);
 
-	IAsyncEnumerable<string> QueryPlayerCode(string gameProviderCode, string brandCode, CancellationToken cancellationToken = default);
+	IAsyncEnumerable<string> QueryPlayerCode(string gameProviderCode, string brandCode, DateTimeOffset? startTime, DateTimeOffset? endTime, CancellationToken cancellationToken = default);
 
-	IAsyncEnumerable<string> QueryPlayerCode(string gameProviderCode, int year, int month, CancellationToken cancellationToken = default);
+	IAsyncEnumerable<string> QueryPlayerCode(string gameProviderCode, DateTimeOffset? startTime, DateTimeOffset? endTime, CancellationToken cancellationToken = default);
 }

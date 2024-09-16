@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Collections.Specialized;
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
@@ -212,24 +213,20 @@ internal class GameFundClient(HttpClient httpClient) : IGameFundClient
 		_ = response.EnsureSuccessStatusCode();
 	}
 
-	public async ValueTask<string[]> GameFundTransferTraceBrandQueryAsync(string gameProviderCode, string brandCode, CancellationToken cancellationToken = default)
+	public async ValueTask<string[]> GameFundTransferTraceQueryAsync(string gameProviderCode, string? brandCode, DateTimeOffset? startTime, DateTimeOffset? endTime, CancellationToken cancellationToken = default)
 	{
+		var query = HttpUtility.ParseQueryString("");
+		query["gameProviderCode"] = gameProviderCode;
+		if (brandCode is { Length: > 0 })
+			query["brandCode"] = brandCode;
+		if (startTime is DateTimeOffset start)
+			query["startTime"] = start.ToString("o");
+		if (endTime is DateTimeOffset end)
+			query["endTime"] = end.ToString("o");
+		var url = "transfertrace/trace/query?" + query.ToString();
+
 		var response = await httpClient.GetAsync(
-			requestUri: $"transfertrace/trace/queryWithBrand?gameProviderCode={gameProviderCode}&brandCode={brandCode}",
-			cancellationToken: cancellationToken)
-			.ConfigureAwait(false);
-
-		_ = response.EnsureSuccessStatusCode();
-
-		var contentJson = await response.Content.ReadAsStringAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
-
-		return JsonSerializer.Deserialize<string[]>(contentJson, _SerializerOptions)!;
-	}
-
-	public async ValueTask<string[]> GameFundTransferTraceMonthQueryAsync(string gameProviderCode, int year, int month, CancellationToken cancellationToken = default)
-	{
-		var response = await httpClient.GetAsync(
-			requestUri: $"transfertrace/trace/queryWithMonth?gameProviderCode={gameProviderCode}&year={year}&month={month}",
+			requestUri: url,
 			cancellationToken: cancellationToken)
 			.ConfigureAwait(false);
 

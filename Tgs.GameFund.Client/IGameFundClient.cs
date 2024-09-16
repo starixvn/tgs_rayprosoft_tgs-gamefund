@@ -23,4 +23,6 @@ public interface IGameFundClient
 	public ValueTask GameFundTransferUpdateBySuccessAsync(Guid id, Guid cashRespTransactionId, string gameRespTransactionId, decimal mainWalletBalance, string description, JsonNode additionalData, CancellationToken cancellationToken = default);
 
 	public ValueTask GameFundTransferTraceSaveAsync(Guid gameProviderId, Guid walletId, string playerCode, CancellationToken cancellationToken = default);
+
+	public ValueTask<string[]> GameFundTransferTraceQueryAsync(string gameProviderCode, string? brandCode, DateTimeOffset? startTime, DateTimeOffset? endTime, CancellationToken cancellationToken = default);
 }

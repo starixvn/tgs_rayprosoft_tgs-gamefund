@@ -46,9 +46,9 @@ public class GameFundTransferTraceRepository(
 			.ConfigureAwait(false);
 	}
 
-	public async IAsyncEnumerable<string> QueryPlayerCode(string gameProviderCode, string brandCode, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+	public async IAsyncEnumerable<string> QueryPlayerCode(string gameProviderCode, string brandCode, DateTimeOffset? startTime, DateTimeOffset? endTime, [EnumeratorCancellation] CancellationToken cancellationToken = default)
 	{
-		var query = context.GameFundTransferTraces
+		var baseQuery = context.GameFundTransferTraces
 			.Join(
 				inner: context.GameProviders,
 				outerKeySelector: t => t.GameProviderId,
@@ -64,7 +64,15 @@ public class GameFundTransferTraceRepository(
 				outerKeySelector: tgp => tgp.p.BrandId,
 				innerKeySelector: b => b.Id,
 				resultSelector: (tgp, b) => new { tgp.t, tgp.gp, b })
-			.Where(x => x.b.Code == brandCode && x.gp.Code == gameProviderCode)
+			.Where(x => x.b.Code == brandCode && x.gp.Code == gameProviderCode);
+
+		if (startTime is DateTimeOffset start)
+			baseQuery = baseQuery.Where(x => x.t.UpdatedOn >= start);
+
+		if (endTime is DateTimeOffset end)
+			baseQuery = baseQuery.Where(x => x.t.UpdatedOn < end);
+
+		var query = baseQuery
 			.Select(x => x.t.PlayerCode)
 			.AsAsyncEnumerable()
 			.WithCancellation(cancellationToken);
@@ -72,18 +80,23 @@ public class GameFundTransferTraceRepository(
 			yield return playerCode;
 	}
 
-	public async IAsyncEnumerable<string> QueryPlayerCode(string gameProviderCode, int year, int month, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+	public async IAsyncEnumerable<string> QueryPlayerCode(string gameProviderCode, DateTimeOffset? startTime, DateTimeOffset? endTime, [EnumeratorCancellation] CancellationToken cancellationToken = default)
 	{
-		var offset = DateTimeOffset.Now.Offset;
-		var begin = new DateTimeOffset(year, month, day: 1, hour: 0, minute: 0, second: 0, offset: offset);
-		var end = begin.AddDays(DateTime.DaysInMonth(year, month));
-		var query = context.GameFundTransferTraces
+		var baseQuery = context.GameFundTransferTraces
 			.Join(
 				inner: context.GameProviders,
 				outerKeySelector: t => t.GameProviderId,
 				innerKeySelector: gp => gp.Id,
 				resultSelector: (t, gp) => new { t, gp })
-			.Where(x => x.t.UpdatedOn >= begin && x.t.UpdatedOn < end && x.gp.Code == gameProviderCode)
+			.Where(x => x.gp.Code == gameProviderCode);
+
+		if (startTime is DateTimeOffset start)
+			baseQuery = baseQuery.Where(x => x.t.UpdatedOn >= start);
+
+		if (endTime is DateTimeOffset end)
+			baseQuery = baseQuery.Where(x => x.t.UpdatedOn < end);
+
+		var query = baseQuery
 			.Select(x => x.t.PlayerCode)
 			.AsAsyncEnumerable()
 			.WithCancellation(cancellationToken);

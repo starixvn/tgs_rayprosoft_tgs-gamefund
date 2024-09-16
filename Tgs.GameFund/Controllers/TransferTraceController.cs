@@ -23,27 +23,15 @@ public class TransferTraceController : ControllerBase
 			.ConfigureAwait(false);
 	}
 
-	[HttpGet("trace/queryWithBrand")]
-	public IAsyncEnumerable<string> GameFundTransferTraceQueryBrandAsync(
+	[HttpGet("trace/query")]
+	public IAsyncEnumerable<string> GameFundTransferTraceQueryAsync(
 		[FromServices] IMediator mediator,
-		[FromQuery] string gameProviderCode,
-		[FromQuery] string brandCode)
+		[FromQuery] GameFundTransferTraceQueryViewModel source)
 		=> mediator.CreateStream(
-			request: new GameFundTransferTraceBrandQueryRequest(
-				GameProviderCode: gameProviderCode,
-				BrandCode: brandCode),
-			cancellationToken: HttpContext.RequestAborted);
-
-	[HttpGet("trace/queryWithMonth")]
-	public IAsyncEnumerable<string> GameFundTransferTraceQueryMonthAsync(
-		[FromServices] IMediator mediator,
-		[FromQuery] string gameProviderCode,
-		[FromQuery] int year,
-		[FromQuery] int month)
-		=> mediator.CreateStream(
-			request: new GameFundTransferTraceMonthQueryRequest(
-				GameProviderCode: gameProviderCode,
-				Year: year,
-				Month: month),
+			request: new GameFundTransferTraceQueryRequest(
+				GameProviderCode: source.GameProviderCode,
+				BrandCode: source.BrandCode,
+				StartTime: source.StartTime,
+				EndTime: source.EndTime),
 			cancellationToken: HttpContext.RequestAborted);
 }
