@@ -67,10 +67,10 @@ public class GameFundTransferTraceRepository(
 			.Where(x => x.b.Code == brandCode && x.gp.Code == gameProviderCode);
 
 		if (startTime is DateTimeOffset start)
-			baseQuery = baseQuery.Where(x => x.t.UpdatedOn >= start);
+			baseQuery = baseQuery.Where(x => x.t.UpdatedOn >= start.ToUniversalTime());
 
 		if (endTime is DateTimeOffset end)
-			baseQuery = baseQuery.Where(x => x.t.UpdatedOn < end);
+			baseQuery = baseQuery.Where(x => x.t.UpdatedOn < end.ToUniversalTime());
 
 		var query = baseQuery
 			.Select(x => x.t.PlayerCode)
@@ -91,10 +91,10 @@ public class GameFundTransferTraceRepository(
 			.Where(x => x.gp.Code == gameProviderCode);
 
 		if (startTime is DateTimeOffset start)
-			baseQuery = baseQuery.Where(x => x.t.UpdatedOn >= start);
+			baseQuery = baseQuery.Where(x => x.t.UpdatedOn >= start.ToUniversalTime());
 
 		if (endTime is DateTimeOffset end)
-			baseQuery = baseQuery.Where(x => x.t.UpdatedOn < end);
+			baseQuery = baseQuery.Where(x => x.t.UpdatedOn < end.ToUniversalTime());
 
 		var query = baseQuery
 			.Select(x => x.t.PlayerCode)
